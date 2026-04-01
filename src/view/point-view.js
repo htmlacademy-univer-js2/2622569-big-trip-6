@@ -23,7 +23,7 @@ export default class PointView extends AbstractView {
     const endTime = `${endDate.getHours().toString().padStart(2, '0')}:${endDate.getMinutes().toString().padStart(2, '0')}`;
 
     // Формирование списка опций
-    const offersHtml = this.#point.offers.map(offer => `
+    const offersHtml = this.#point.offers.map((offer) => `
       <li class="event__offer">
         <span class="event__offer-title">${offer.title}</span>
         &plus;&euro;&nbsp;

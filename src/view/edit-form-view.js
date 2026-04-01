@@ -31,8 +31,8 @@ export default class EditFormView extends AbstractView {
     const price = this.#point?.price || '';
 
     // Генерация опций
-    const offersHtml = OFFERS.map(offer => {
-      const isChecked = this.#point?.offers?.some(o => o.id === offer.id) || false;
+    const offersHtml = OFFERS.map((offer) => {
+      const isChecked = this.#point?.offers?.some((o) => o.id === offer.id) || false;
       return `
         <div class="event__offer-selector">
           <input class="event__offer-checkbox visually-hidden" id="event-offer-${offer.id}" type="checkbox" name="event-offer" ${isChecked ? 'checked' : ''}>
@@ -46,7 +46,7 @@ export default class EditFormView extends AbstractView {
     }).join('');
 
     // Генерация типов
-    const typesHtml = TYPES.map(typeOption => `
+    const typesHtml = TYPES.map((typeOption) => `
       <div class="event__type-item">
         <input id="event-type-${typeOption}" class="event__type-input  visually-hidden" type="radio" name="event-type" value="${typeOption}" ${type === typeOption ? 'checked' : ''}>
         <label class="event__type-label  event__type-label--${typeOption}" for="event-type-${typeOption}">${typeOption}</label>
@@ -55,7 +55,7 @@ export default class EditFormView extends AbstractView {
 
     // Генерация городов для datalist
     const cities = ['Amsterdam', 'Geneva', 'Chamonix', 'London', 'Paris', 'Berlin', 'Rome', 'Barcelona', 'Prague', 'Vienna'];
-    const citiesHtml = cities.map(city => `<option value="${city}"></option>`).join('');
+    const citiesHtml = cities.map((city) => `<option value="${city}"></option>`).join('');
 
     return `
       <li class="trip-events__item">

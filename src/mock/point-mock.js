@@ -2,34 +2,16 @@
 import { TYPES, CITIES, OFFERS } from '../const.js';
 
 // Генерация случайного числа в диапазоне
-const getRandomInteger = (min, max) => {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-};
+const getRandomInteger = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
 // Генерация случайного элемента из массива
-const getRandomItem = (items) => {
-  return items[Math.floor(Math.random() * items.length)];
-};
+const getRandomItem = (items) => items[Math.floor(Math.random() * items.length)];
 
 // Генерация случайной даты
 const getRandomDate = () => {
-  const startDate = new Date(2024, 0, 1); // 1 января 2024
-  const endDate = new Date(2024, 11, 31); // 31 декабря 2024
+  const startDate = new Date(2024, 0, 1);
+  const endDate = new Date(2024, 11, 31);
   return new Date(startDate.getTime() + Math.random() * (endDate.getTime() - startDate.getTime()));
-};
-
-// Форматирование даты
-const formatDate = (date) => {
-  const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
-  const day = date.getDate().toString().padStart(2, '0');
-  const month = months[date.getMonth()];
-  return `${month} ${day}`;
-};
-
-const formatTime = (date) => {
-  const hours = date.getHours().toString().padStart(2, '0');
-  const minutes = date.getMinutes().toString().padStart(2, '0');
-  return `${hours}:${minutes}`;
 };
 
 // Генерация случайных опций для точки маршрута
@@ -70,19 +52,17 @@ const getRandomPhotos = () => {
 };
 
 // Создание структуры пункта назначения
-const createDestination = (city) => {
-  return {
-    id: crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).substring(2),
-    name: city,
-    description: getRandomDescription(),
-    photos: getRandomPhotos()
-  };
-};
+const createDestination = (city) => ({
+  id: crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).substring(2),
+  name: city,
+  description: getRandomDescription(),
+  photos: getRandomPhotos()
+});
 
 // Создание структуры точки маршрута
 export const createPoint = () => {
   const startDate = getRandomDate();
-  const endDate = new Date(startDate.getTime() + getRandomInteger(3600000, 86400000)); // +1-24 часа
+  const endDate = new Date(startDate.getTime() + getRandomInteger(3600000, 86400000));
   const type = getRandomItem(TYPES);
   const city = getRandomItem(CITIES);
   const offers = getRandomOffers();
