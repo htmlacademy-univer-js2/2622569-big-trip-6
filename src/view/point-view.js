@@ -1,4 +1,3 @@
-// src/view/point-view.js
 import AbstractView from './abstract-view.js';
 
 export default class PointView extends AbstractView {
@@ -13,7 +12,6 @@ export default class PointView extends AbstractView {
     const startDate = this.#point.startDate;
     const endDate = this.#point.endDate;
 
-    // Форматирование даты
     const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
     const day = startDate.getDate().toString().padStart(2, '0');
     const month = months[startDate.getMonth()];
@@ -22,7 +20,6 @@ export default class PointView extends AbstractView {
     const startTime = `${startDate.getHours().toString().padStart(2, '0')}:${startDate.getMinutes().toString().padStart(2, '0')}`;
     const endTime = `${endDate.getHours().toString().padStart(2, '0')}:${endDate.getMinutes().toString().padStart(2, '0')}`;
 
-    // Формирование списка опций
     const offersHtml = this.#point.offers.map((offer) => `
       <li class="event__offer">
         <span class="event__offer-title">${offer.title}</span>

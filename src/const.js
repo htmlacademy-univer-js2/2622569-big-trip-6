@@ -1,6 +1,3 @@
-// src/const.js
-
-// Типы точек маршрута (из технического задания)
 export const TYPES = [
   'taxi',
   'bus',
@@ -13,7 +10,6 @@ export const TYPES = [
   'restaurant'
 ];
 
-// Города для назначений
 export const CITIES = [
   'Amsterdam',
   'Geneva',
@@ -27,7 +23,6 @@ export const CITIES = [
   'Vienna'
 ];
 
-// Базовые опции для всех типов
 export const OFFERS = [
   { id: 'offer-1', title: 'Add luggage', price: 50 },
   { id: 'offer-2', title: 'Switch to comfort class', price: 80 },
