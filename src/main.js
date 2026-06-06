@@ -1,7 +1,6 @@
 import Presenter from './presenter.js';
 import PointsModel from './model/points-model.js';
 
-
 const siteMainElement = document.querySelector('.trip-events__list-container');
 
 if (!siteMainElement) {
@@ -10,4 +9,10 @@ if (!siteMainElement) {
 
 const pointsModel = new PointsModel();
 const presenter = new Presenter(siteMainElement, pointsModel);
-presenter.init();
+
+async function bootstrap() {
+  await pointsModel.init();
+  presenter.init();
+}
+
+bootstrap();
