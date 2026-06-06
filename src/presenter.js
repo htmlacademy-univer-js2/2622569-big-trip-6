@@ -58,28 +58,26 @@ export default class Presenter {
 
     switch (this.#currentSortType) {
       case SortType.TIME:
-        return [...points].sort(
-          (pointA, pointB) => {
-            const durationA =
-              pointA.endDate - pointA.startDate;
+        return [...points].sort((pointA, pointB) => {
+          const durationA =
+            pointA.dateTo - pointA.dateFrom;
 
-            const durationB =
-              pointB.endDate - pointB.startDate;
+          const durationB =
+            pointB.dateTo - pointB.dateFrom;
 
-            return durationB - durationA;
-          }
-        );
+          return durationB - durationA;
+        });
 
       case SortType.PRICE:
         return [...points].sort(
           (pointA, pointB) =>
-            pointB.price - pointA.price
+            pointB.basePrice - pointA.basePrice
         );
 
       default:
         return [...points].sort(
           (pointA, pointB) =>
-            pointA.startDate - pointB.startDate
+            pointA.dateFrom - pointB.dateFrom
         );
     }
   }

@@ -345,6 +345,7 @@ export default class EditFormView extends AbstractStatefulView {
       {
         dateFormat: 'd/m/y H:i',
         enableTime: true,
+        // eslint-disable-next-line camelcase
         time_24hr: true,
         defaultDate: this._state.startDate
       }
@@ -355,9 +356,11 @@ export default class EditFormView extends AbstractStatefulView {
       {
         dateFormat: 'd/m/y H:i',
         enableTime: true,
+        // eslint-disable-next-line camelcase
         time_24hr: true,
         defaultDate: this._state.endDate
       }
     );
   }
 }
+
