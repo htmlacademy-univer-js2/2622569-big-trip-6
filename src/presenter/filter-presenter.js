@@ -2,8 +2,6 @@ import FiltersView from '../view/filters-view.js';
 
 import { render, RenderPosition } from '../framework/render.js';
 
-import { UpdateType } from '../const.js';
-
 export default class FilterPresenter {
   #filterContainer = null;
 
@@ -30,9 +28,6 @@ export default class FilterPresenter {
   }
 
   #handleFilterChange = (filterType) => {
-    this.#filterModel.setFilter(
-      UpdateType.MAJOR,
-      filterType
-    );
+    this.#filterModel.setFilter(filterType);
   };
 }

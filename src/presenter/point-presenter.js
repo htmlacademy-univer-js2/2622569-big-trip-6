@@ -30,7 +30,7 @@ export default class PointPresenter {
 
     this.#editFormComponent = new EditFormView({
       point: this.#point,
-      onFormSubmit: this.#handleFormClose,
+      onFormSubmit: this.#handleFormSubmit,
       onCancelClick: this.#handleFormClose
     });
 
@@ -40,22 +40,57 @@ export default class PointPresenter {
     }
 
     replace(this.#pointComponent, prevPointComponent);
-    replace(this.#editFormComponent, prevEditFormComponent);
+
+    if (
+      this.#pointListContainer.contains(
+        prevEditFormComponent.element
+      )
+    ) {
+      replace(
+        this.#editFormComponent,
+        prevEditFormComponent
+      );
+    }
   }
 
   resetView() {
-    if (this.#pointListContainer.contains(this.#editFormComponent.element)) {
-      replace(this.#pointComponent, this.#editFormComponent);
+    if (
+      this.#pointListContainer.contains(
+        this.#editFormComponent.element
+      )
+    ) {
+      replace(
+        this.#pointComponent,
+        this.#editFormComponent
+      );
     }
+  }
+
+  setSaving() {
+    this.#editFormComponent.setSaving();
+  }
+
+  setDeleting() {
+    this.#editFormComponent.setDeleting();
+  }
+
+  setAborting() {
+    this.#editFormComponent.setAborting();
   }
 
   #replacePointToForm() {
     this.#onModeChange();
-    replace(this.#editFormComponent, this.#pointComponent);
+    replace(
+      this.#editFormComponent,
+      this.#pointComponent
+    );
   }
 
   #replaceFormToPoint() {
-    replace(this.#pointComponent, this.#editFormComponent);
+    replace(
+      this.#pointComponent,
+      this.#editFormComponent
+    );
   }
 
   #handleEditClick = () => {
@@ -64,6 +99,10 @@ export default class PointPresenter {
 
   #handleFormClose = () => {
     this.#replaceFormToPoint();
+  };
+
+  #handleFormSubmit = (update) => {
+    this.#onDataChange(update);
   };
 
   #handleFavoriteClick = () => {

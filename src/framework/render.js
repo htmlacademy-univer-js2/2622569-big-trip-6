@@ -6,11 +6,16 @@ function createElement(template) {
 }
 
 function render(component, container, place = 'beforeend') {
-  container.insertAdjacentElement(place, component.element);
+  container.insertAdjacentElement(
+    place,
+    component.element
+  );
 }
 
 function replace(newComponent, oldComponent) {
-  if (oldComponent.element.parentElement === null) {
+  if (
+    oldComponent.element.parentElement === null
+  ) {
     return;
   }
 
@@ -20,4 +25,17 @@ function replace(newComponent, oldComponent) {
   );
 }
 
-export { createElement, render, replace };
+function remove(component) {
+  if (component === null) {
+    return;
+  }
+
+  component.removeElement();
+}
+
+export {
+  createElement,
+  render,
+  replace,
+  remove
+};
