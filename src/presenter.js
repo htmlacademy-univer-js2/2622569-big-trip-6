@@ -7,10 +7,17 @@ import PointPresenter from './presenter/point-presenter.js';
 
 import { render } from './framework/render.js';
 
+import UiBlocker from './framework/ui-blocker/ui-blocker.js';
+
 import {
   FilterType,
   SortType
 } from './const.js';
+
+const TimeLimit = {
+  LOWER_LIMIT: 350,
+  UPPER_LIMIT: 1000
+};
 
 export default class Presenter {
   #container = null;
@@ -26,6 +33,11 @@ export default class Presenter {
   #currentSortType = SortType.DAY;
 
   #pointPresenters = new Map();
+
+  #uiBlocker = new UiBlocker({
+    lowerLimit: TimeLimit.LOWER_LIMIT,
+    upperLimit: TimeLimit.UPPER_LIMIT
+  });
 
   constructor(container, pointsModel) {
     this.#container = container;
@@ -100,15 +112,30 @@ export default class Presenter {
     this.#renderPoints();
   };
 
-  #handlePointChange = (updatedPoint) => {
-    this.#pointsModel.updatePoint(updatedPoint);
-
+  #handlePointChange = async (updatedPoint) => {
     const pointPresenter =
       this.#pointPresenters.get(updatedPoint.id);
 
+    this.#uiBlocker.block();
+
     if (pointPresenter) {
-      pointPresenter.init(updatedPoint);
+      pointPresenter.setSaving();
     }
+
+    try {
+      const response =
+        await this.#pointsModel.updatePoint(updatedPoint);
+
+      if (pointPresenter) {
+        pointPresenter.init(response);
+      }
+    } catch {
+      if (pointPresenter) {
+        pointPresenter.setAborting();
+      }
+    }
+
+    this.#uiBlocker.unblock();
   };
 
   #handleModeChange = () => {

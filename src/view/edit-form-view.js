@@ -217,15 +217,15 @@ function createEditFormTemplate(point) {
           <button
             class="event__save-btn btn btn--blue"
             type="submit"
+            ${point.isDisabled ? 'disabled' : ''}
           >
-            Save
-          </button>
-
+            ${point.isSaving ? 'Saving...' : 'Save'}
           <button
             class="event__reset-btn"
             type="reset"
+            ${point.isDisabled ? 'disabled' : ''}
           >
-            Delete
+            ${point.isDeleting ? 'Deleting...' : 'Delete'}
           </button>
 
           <button
@@ -287,7 +287,12 @@ export default class EditFormView extends AbstractStatefulView {
   }) {
     super();
 
-    this._setState(point);
+    this._setState({
+      ...point,
+      isDisabled: false,
+      isSaving: false,
+      isDeleting: false
+    });
 
     this.#handleFormSubmit = onFormSubmit;
     this.#handleEditClick = onEditClick;
