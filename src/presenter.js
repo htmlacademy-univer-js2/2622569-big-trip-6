@@ -3,6 +3,7 @@ import SortView from './view/sort-view.js';
 import PointListView from './view/point-list-view.js';
 import EmptyPointsView from './view/empty-points-view.js';
 
+
 import PointPresenter from './presenter/point-presenter.js';
 
 import { render } from './framework/render.js';
@@ -28,7 +29,7 @@ export default class Presenter {
   #filtersComponent = null;
   #sortComponent = null;
   #emptyPointsComponent = null;
-  #tripInfoComponent = null;
+
 
   #currentFilter = FilterType.EVERYTHING;
   #currentSortType = SortType.DAY;
@@ -47,7 +48,7 @@ export default class Presenter {
 
   init() {
     this.#container.innerHTML = '';
-    this.#renderTripInfo();
+
 
     this.#filtersComponent = new FiltersView({
       currentFilter: this.#currentFilter,
@@ -190,24 +191,7 @@ export default class Presenter {
       point.id,
       pointPresenter
     );
-    #renderTripInfo() {
-  const tripInfoContainer =
-    document.querySelector('.trip-main');
-
-  const points = this.#pointsModel.getPoints();
-
-  if (!points.length) {
-    return;
   }
 
-  this.#tripInfoComponent =
-    new TripInfoView(points);
 
-  render(
-    this.#tripInfoComponent,
-    tripInfoContainer,
-    'afterbegin'
-  );
-}
-  }
 }

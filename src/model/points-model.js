@@ -19,13 +19,9 @@ export default class PointsModel extends Observable {
   }
 
   async init() {
-    console.log('INIT START');
+
     try {
       const points = await this.#pointsApiService.points;
-
-      console.log('POINTS:', points);
-      console.log('FIRST POINT:', points[0]);
-
       this.#points = points.map((point) => ({
         ...point,
         basePrice: point.base_price,
@@ -36,11 +32,11 @@ export default class PointsModel extends Observable {
 
       this._notify(UpdateType.INIT);
     } catch (err) {
-      console.error('API ERROR:', err);
+
 
       this.#points = [];
       this._notify(UpdateType.INIT);
-}
+    }
   }
 
   getPoints() {
